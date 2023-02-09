@@ -1,8 +1,8 @@
 .contenedor {
     margin: 50px auto;
     width: 400px;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;    
+    background: -webkit-linear-gradient(left, #111c55, #4e937a);
     border-radius: 10px;
   }
   
