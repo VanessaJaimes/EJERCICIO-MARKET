@@ -54,6 +54,14 @@ createApp({
         }
         return true //Si no entra a ningún if, quiere decir que los datos son correctos.
       },
+      resetForm(){
+        this.name=''
+        this.id=''
+        this.dateOfAdmission=''
+        this.failure=''
+        this.deadLine=''
+        this.inCharge=''
+      },
       registerResume(){
         const correctData=this.validateData()
         if(!correctData){
@@ -69,16 +77,17 @@ createApp({
 
         }
         this.resumes.push(resume)
-        localStorage.setItem("resumes",this.resumes) //Actualizo en el LocalStorage la data.
+        localStorage.setItem("resumes",JSON.stringify(this.resumes)) //Actualizo en el LocalStorage la data.
         this.successfulAlert()
 
-        console.log(this.resumes)
+        this.resetForm()
+        console.log(this.resumes) //Saco por consola la base de datos con los registros
 
       }
     },
-    mount(){
-      this.resumes=localStorage.getItem("resumes")
-      if(resumes===null){
+    mounted(){
+      this.resumes=JSON.parse(localStorage.getItem("resumes"))
+      if(this.resumes===null){
         this.resumes=[]
       }
     }
