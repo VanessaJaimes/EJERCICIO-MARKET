@@ -1,0 +1,167 @@
+:root{
+    --real-white: #fff;
+    --real-black: #000;
+    --real-green: #4E937A;
+    --real-blue: #111C55;
+    --real-dark-green: #849483;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    border: 0px;
+}
+
+.body-main{
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--real-blue);
+    color: var(--real-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header{
+    height: 15vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.image-ref{
+    color: var(--real-white);
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.item-ref--header{
+    color: var(--real-white);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0px 30px;
+}
+
+.item-ref--header:hover{
+    color: var(--real-green);
+}
+
+.main-content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-labels{
+    width: 40%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+}
+
+.content-label--main{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.label-title--main{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--real-white);
+}
+
+.label-title--secondary{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(189, 189, 189);
+}
+
+.content-image{
+    width: 40%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-ref--content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+}
+
+.ref-image--content{
+    background-image: url(../img/motor.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 90%;
+    animation-name: float;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.main-footer{
+    height: 15vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+@keyframes float{
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+.footer-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 50px;
+}
+
+.content-image--footer{
+    height: 70px;
+}
