@@ -7,7 +7,7 @@ var app = new Vue({
     date: "",
     ID: "",
     NIT: "",
-
+    name:"",
     inventory: [
       { name: "aceite", amount: 10, price: 30000 },
       { name: "empaque", amount: 100, price: 2500 },
@@ -23,20 +23,6 @@ var app = new Vue({
   },
 
   methods: {
-    showID() {
-      this.is = {
-        id: true,
-        nit: false,
-      };
-    },
-
-    showNIT() {
-      this.is = {
-        id: false,
-        nit: true,
-      };
-    },
-
     addReplacement() {
       if (!this.date || this.date == "" || this.date == null) {
         Swal.fire({
@@ -105,13 +91,13 @@ var app = new Vue({
 
           this.amount = 0;
           this.selected = null;
-          this.ID = "";
-          this.NIT = "";
-          this.date = "";
-          this.is = {
-            id: false,
-            nit: false,
-          };
+          // this.ID = "";
+          // this.NIT = "";
+          // this.date = "";
+          // this.is = {
+          //   id: false,
+          //   nit: false,
+          // };
 
           Swal.fire({
             position: "center",
@@ -164,13 +150,13 @@ var app = new Vue({
 
           this.amount = 0;
           this.selected = null;
-          this.ID = "";
-          this.NIT = "";
-          this.date = "";
-          this.is = {
-            id: false,
-            nit: false,
-          };
+          // this.ID = "";
+          // this.NIT = "";
+          // this.date = "";
+          // this.is = {
+          //   id: false,
+          //   nit: false,
+          // };
           Swal.fire({
             position: "center",
             icon: "success",
@@ -199,5 +185,18 @@ var app = new Vue({
     if (productSell != null) {
       this.productsSelected = productSell;
     }
+    if(JSON.parse(localStorage.getItem("is"))===null) return
+
+    this.is=JSON.parse(localStorage.getItem("is"))
+    if(this.is.id){
+      this.ID=localStorage.getItem("id")
+    }
+    if(this.is.nit){
+      this.NIT=localStorage.getItem("id")
+    }
+    this.name=localStorage.getItem("name")
+    this.date=localStorage.getItem("deadLine")
+    
+
   },
 });
