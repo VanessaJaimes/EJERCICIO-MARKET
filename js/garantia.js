@@ -22,6 +22,7 @@ var app = new Vue({
               this.result = swal("Entrega del vehículo realizada","Hola " + id[i].name +" tiene garantía para el vehículo " + id[i].id + " de reparación y respuestos durante 3 meses la cual comienza " + id[i].deadLine + " y finaliza " + threemonths.toLocaleDateString(),"success");
           } 
             }
+            Init();
       },
 
     }
