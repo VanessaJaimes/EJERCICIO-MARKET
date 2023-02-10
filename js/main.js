@@ -215,8 +215,6 @@ var app = new Vue({
           });
           return false;
         }
-
-        // console.log(this.productsSelected);
       }
     },
   },
