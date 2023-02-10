@@ -10,12 +10,31 @@ createApp({
         deadLine:'',
         inCharge:'', //Encargado de la reparación
 
-        spareParts:true, //TODO: esta variable debe enlazarse con el radio button, es la que habilita el modal de repuestos.
+        spareParts:'ok',
         resumes:[], //Esta es la base de datos con las hojas de vida
+
+        //Variable habilitar NIT o Cédula
+        is: {
+          id: false,
+          nit: false,
+        }
 
       }
     },
     methods:{
+      //Métodos para habilitar el input de ID o cédula.
+      showID() {
+        this.is = {
+          id: true,
+          nit: false,
+        }
+      },
+  
+      showNIT() {
+        this.is = {
+          id: false,
+          nit: true,
+        }},
       errorAlert(msg){
         Swal.fire({
           icon: 'error',
@@ -61,6 +80,7 @@ createApp({
         this.failure=''
         this.deadLine=''
         this.inCharge=''
+        this.spareParts='ok'
       },
       registerResume(){
         const correctData=this.validateData()
@@ -81,6 +101,9 @@ createApp({
         this.successfulAlert()
 
         this.resetForm()
+        if(this.spareParts==="ok"){
+          location.href="respuestos.html"
+        }
         console.log(this.resumes) //Saco por consola la base de datos con los registros
 
       }
