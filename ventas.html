@@ -24,21 +24,19 @@
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3 class="register-heading">Repuestos del automotor</h3>
                     <div class="row register-form">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <h6>Identificacion del dueño o NIT empresa del vehiculo:</h6>
                                 <input type="text" class="form-control"
                                     placeholder="Identificacion del dueño o NIT empresa*" value="" />
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
-                                <h6>Fecha de venta del repuesto:</h6>
-                                <input type="date" class="form-control" placeholder="Fecha de venta del repuesto *"
+                                <h6>Nombre:</h6>
+                                <input type="text" class="form-control" placeholder="Ingrese su nombre *"
                                     value="" />
                             </div>
                             <div class="form-group">
-                                <h6>Repuesto a registrar:</h6>
+                                <h6>Repuesto a comprar:</h6>
                                 <select class="form-control">
                                     <option class="hidden" selected disabled>Selecciona el repuesto
                                     </option>
@@ -49,7 +47,12 @@
                                     <option value="discos frenos">Disco frenos</option>
                                 </select>
                             </div>
-                            <input type="submit" class="btnRegister" value="Registrar" />
+                            <div class="form-group">
+                                <h6>Cantidad:</h6>
+                                <input type="number" class="form-control" placeholder="Ingrese la cantidad a comprar *"
+                                    value="" />
+                            </div>
+                            <input type="submit" class="btnRegister" value="Comprar" />
                         </div>
                     </div>
                 </div>

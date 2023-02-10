@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Repuestos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/automotores.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="sweetalert2.min.css">
+  <link rel="shortcut icon" href="/img/mecanica.png">
+</head>
+
+<body>
+  <div id="app">
+
+
+
+    <div class="container register">
+      <div class="row">
+        <div class="col-md-3 register-left">
+          <img src="img/mecanica.png" alt="" />
+          <h3>Bienvenid@</h3>
+          <p>Registro de repuestos de automotores.</p>
+          <a href="./inicio.html" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Salir</a>
+        </div>
+
+        <div class="col-md-9 register-right">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <h3 class="register-heading">Repuestos del automotor</h3>
+
+
+              <form @submit.prevent="addReplacement" class="row register-form">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <h6>Seleccione Identificacion o NIT : </h6>
+                    <div class="container my-3">
+                      <button @click.prevent="showID" class="btn btn-outline-primary">Numero Identificacion</button>
+                      <button @click.prevent="showNIT" class="btn btn-outline-primary">NIT</button>
+                    </div>
+                    <input v-if="is.id" v-model="ID" type="text" class="form-control"
+                      placeholder="Numero Identificacion *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
+                      required />
+                    <input v-if="is.nit" v-model="NIT" type="text" class="form-control" placeholder="NIT empresa*"
+                      pattern="(^[0-9]+-{1}[0-9]{1})" required />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <h6>Fecha de venta del repuesto:</h6>
+                    <input v-model="date" type="date" class="form-control"
+                      placeholder="Fecha de venta del repuesto *" />
+                  </div>
+                  <div class="form-group">
+                    <h6>Repuesto a registrar:</h6>
+                    <select v-model="selected" class="form-control">
+                      <option class="hidden" selected disabled>Selecciona el repuesto
+                      </option>
+                      <option value="aceite">Aceite</option>
+                      <option value="empaque">Empaque</option>
+                      <option value="llanta">Llanta</option>
+                      <option value="bateria">Bateria</option>
+                      <option value="discos frenos">Disco frenos</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <h6>Cantidad</h6>
+                    <input v-model="amount" type="number" class="form-control">
+                  </div>
+                  <input type="submit" class="btnRegister" value="Registrar" />
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  </div>
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/main.js"></script>
+</body>
+
+
+</html>
