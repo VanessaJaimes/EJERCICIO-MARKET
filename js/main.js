@@ -71,7 +71,6 @@ var app = new Vue({
         return false;
       }
 
-      // if-cedula
       if (
         (this.selected === "aceite" ||
           this.selected === "empaque" ||
