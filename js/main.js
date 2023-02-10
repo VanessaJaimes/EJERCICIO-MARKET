@@ -6,6 +6,7 @@ var app = new Vue({
     productsSelected: [],
     date: "",
     ID: "",
+    NIT: "",
 
     inventory: [
       { name: "aceite", amount: 10, price: 30000 },
@@ -14,23 +15,63 @@ var app = new Vue({
       { name: "bateria", amount: 100, price: 50000 },
       { name: "discos frenos", amount: 40, price: 30000 },
     ],
+
+    is: {
+      id: false,
+      nit: false,
+    },
   },
 
   methods: {
+    showID() {
+      this.is = {
+        id: true,
+        nit: false,
+      };
+    },
+
+    showNIT() {
+      this.is = {
+        id: false,
+        nit: true,
+      };
+    },
+
     addReplacement() {
+      if (!this.date || this.date == "" || this.date == null) {
+        Swal.fire({
+          title: "Error",
+          text: "Fecha Venta Repuesto inválido",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
+      }
+      if (!this.selected || this.selected == "" || this.selected == null) {
+        Swal.fire({
+          title: "Error",
+          text: "Seleccione un repuesto",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
+      }
       if (
-        this.ID === "" ||
-        this.ID === undefined ||
-        this.ID === null ||
-        !this.ID ||
-        this.selected === null ||
-        this.selected === undefined ||
-        this.amount <= 0 ||
-        this.date === ""
+        !this.amount ||
+        this.amount == "" ||
+        this.amount == null ||
+        this.amount <= 0
       ) {
-        alert("Por favor todos los campos son obligatorios");
+        Swal.fire({
+          title: "Error",
+          text: "La cantidad debe ser mayor a cero",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
       }
 
+      // if-cedula
       if (
         (this.selected === "aceite" ||
           this.selected === "empaque" ||
@@ -38,51 +79,125 @@ var app = new Vue({
           this.selected === "bateria" ||
           this.selected === "discos frenos") &&
         this.amount > 0 &&
-        this.date
+        this.date &&
+        this.ID
       ) {
-        this.productsSelected.push({
-          name: `${this.selected}`,
-          amount: `${this.amount}`,
-          date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
+        let isAvailable = this.inventory.filter((item) => {
+          if (item.name === this.selected) {
+            if (this.amount <= item.amount) {
+              return item;
+            }
+          }
         });
+
+        if (isAvailable.length > 0) {
+          this.productsSelected.push({
+            id: parseInt(this.ID),
+            nameReplacement: `${this.selected}`,
+            amount: parseInt(`${this.amount}`),
+            date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
+          });
+
+          localStorage.setItem(
+            "productSell",
+            JSON.stringify(this.productsSelected)
+          );
+
+          this.amount = 0;
+          this.selected = null;
+          this.ID = "";
+          this.NIT = "";
+          this.date = "";
+          this.is = {
+            id: false,
+            nit: false,
+          };
+
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Repuesto agregado correctamente",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "No hay cantidades disponibles solicitadas",
+            icon: "error",
+            confirmButtonText: "Cerrar",
+          });
+          return false;
+        }
+
+        console.log(this.productsSelected);
+      } else if (
+        (this.selected === "aceite" ||
+          this.selected === "empaque" ||
+          this.selected === "llanta" ||
+          this.selected === "bateria" ||
+          this.selected === "discos frenos") &&
+        this.amount > 0 &&
+        this.date &&
+        this.NIT
+      ) {
+        let isAvailable = this.inventory.filter((item) => {
+          if (item.name === this.selected) {
+            if (this.amount <= item.amount) {
+              return item;
+            }
+          }
+        });
+
+        if (isAvailable.length > 0) {
+          this.productsSelected.push({
+            NIT: this.NIT,
+            nameReplacement: `${this.selected}`,
+            amount: parseInt(`${this.amount}`),
+            date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
+          });
+
+          localStorage.setItem(
+            "productSell",
+            JSON.stringify(this.productsSelected)
+          );
+
+          this.amount = 0;
+          this.selected = null;
+          this.ID = "";
+          this.NIT = "";
+          this.date = "";
+          this.is = {
+            id: false,
+            nit: false,
+          };
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Repuesto agregado correctamente",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "No hay cantidades disponibles solicitadas",
+            icon: "error",
+            confirmButtonText: "Cerrar",
+          });
+          return false;
+        }
 
         console.log(this.productsSelected);
       }
-
-      // if (this.selected === "empaque" && this.amount > 0) {
-      //   this.productsSelected.push({
-      //     name: `${this.selected}`,
-      //     amount: `${this.amount}`,
-      //   });
-
-      //   console.log(this.productsSelected);
-      // }
-
-      // if (this.selected === "llanta" && this.amount > 0) {
-      //   this.productsSelected.push({
-      //     name: `${this.selected}`,
-      //     amount: `${this.amount}`,
-      //   });
-
-      //   console.log(this.productsSelected);
-      // }
-
-      // if (this.selected === "bateria" && this.amount > 0) {
-      //   this.productsSelected.push({
-      //     name: `${this.selected}`,
-      //     amount: `${this.amount}`,
-      //   });
-
-      //   console.log(this.productsSelected);
-      // }
-      // if (this.selected === "discos frenos" && this.amount > 0) {
-      //   this.productsSelected.push({
-      //     name: `${this.selected}`,
-      //     amount: `${this.amount}`,
-      //   });
-
-      //   console.log(this.productsSelected);
-      // }
     },
+  },
+
+  created() {
+    let productSell = JSON.parse(localStorage.getItem("productSell"));
+
+    if (productSell != null) {
+      this.productsSelected = productSell;
+    }
   },
 });
