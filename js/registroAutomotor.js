@@ -3,18 +3,18 @@ const { createApp } = Vue
 createApp({
     data() {
       return {
-        name:'',
-        id:'',
+        name:'', // TODO: Opcional llevarla al local Storage
+        id:'', //TODO:exportarlas al local Storage
         dateOfAdmission:'', //Fecha ingreso vehículo
         failure:'', //Falla del vehículo
         deadLine:'',
         inCharge:'', //Encargado de la reparación
 
-        spareParts:'ok',
+        spareParts:'', //Variable que habilita la redirrecicón.
         resumes:[], //Esta es la base de datos con las hojas de vida
 
         //Variable habilitar NIT o Cédula
-        is: {
+        is: {  //TODO: Exportarlas al local Storage
           id: false,
           nit: false,
         }
@@ -54,7 +54,7 @@ createApp({
       validateData(){
         //Validación todos los campos llenos
         const fullFields=(this.name!="" && this.id !='' && this.dateOfAdmission!="" && this.failure!=""
-          && this.deadLine!="" && this.inCharge!="")
+          && this.deadLine!="" && this.inCharge!="" && this.spareParts!="")
         if(!fullFields){
           this.errorAlert("Recuerde digitar todos los campos del formulario")
           return false
@@ -80,7 +80,7 @@ createApp({
         this.failure=''
         this.deadLine=''
         this.inCharge=''
-        this.spareParts='ok'
+       
       },
       registerResume(){
         const correctData=this.validateData()
@@ -99,11 +99,12 @@ createApp({
         this.resumes.push(resume)
         localStorage.setItem("resumes",JSON.stringify(this.resumes)) //Actualizo en el LocalStorage la data.
         this.successfulAlert()
-
         this.resetForm()
         if(this.spareParts==="ok"){
           location.href="respuestos.html"
         }
+        
+       
         console.log(this.resumes) //Saco por consola la base de datos con los registros
 
       }
