@@ -93,7 +93,7 @@ var app = new Vue({
         if (isAvailable.length > 0) {
           this.productsSelected.push({
             id: parseInt(this.ID),
-            nameReplacement: `${this.selected}`,
+            name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
           });
@@ -130,7 +130,7 @@ var app = new Vue({
           return false;
         }
 
-        console.log(this.productsSelected);
+        // console.log(this.productsSelected);
       } else if (
         (this.selected === "aceite" ||
           this.selected === "empaque" ||
@@ -152,7 +152,7 @@ var app = new Vue({
         if (isAvailable.length > 0) {
           this.productsSelected.push({
             NIT: this.NIT,
-            nameReplacement: `${this.selected}`,
+            name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
           });
@@ -188,7 +188,7 @@ var app = new Vue({
           return false;
         }
 
-        console.log(this.productsSelected);
+        // console.log(this.productsSelected);
       }
     },
   },
