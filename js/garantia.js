@@ -38,7 +38,7 @@ var app = new Vue({
               "Hola " +
               id[i].name +
               " con identificación " +
-              id[i].id + "tiene garantía para el vehículo de reparación y respuestos durante 3 meses la cual comienza " +
+              id[i].id + " tiene garantía para el vehículo de reparación y respuestos durante 3 meses la cual comienza " +
               id[i].deadLine +
               " y finaliza " +
               threemonths.toLocaleDateString(),
