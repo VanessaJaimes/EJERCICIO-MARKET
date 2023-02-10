@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Garantías</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/automotores.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/img/mecanica.png">
+</head>
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="img/mecanica.png" alt="" />
+            <h3>Bienvenid@</h3>
+            <p>Registro para redimir garantía.</p>
+            <a href="./inicio.html" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Salir</a><br />
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Gararantías</h3>
+                    <div class="row register-form">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <h6>Identificacion del dueño o NIT empresa del vehiculo:</h6>
+                                <input type="text" class="form-control"
+                                    placeholder="Identificacion del dueño o NIT empresa*" value="" />
+                            </div>
+                            <div class="form-group">
+                                <h6>Nombre:</h6>
+                                <input type="text" class="form-control" placeholder="Ingrese su nombre *"
+                                    value="" />
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="checkbox1" v-model="checkbox1">
+                                <label for="checkbox1">Se le hizo el mantenimiento</label><br>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="checkbox2" v-model="checkbox2">
+                                <label for="checkbox2">Se le hizo las revisiones necesarias</label><br>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="checkbox3" v-model="checkbox3">
+                                <label for="checkbox3">Está listo para la entrega</label><br>
+                            </div>
+                            <div class="form-group">
+                                <input type="date" id="dateInput" v-model="dateInput" class="dates rounded">
+                            </div>
+                            <button type="button" @click="submitForm" class="btnRegister">Enviar datos</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="./js/garantia.js"></script>
+
+</html>
