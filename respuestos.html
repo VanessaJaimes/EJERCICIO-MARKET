@@ -9,6 +9,7 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="sweetalert2.min.css">
   <link rel="shortcut icon" href="/img/mecanica.png">
 </head>
 
@@ -31,22 +32,31 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
               <h3 class="register-heading">Repuestos del automotor</h3>
 
-              <form class="row register-form">
+
+              <form @submit.prevent="addReplacement" class="row register-form">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <h6>Identificacion del dueño o NIT empresa del vehiculo:</h6>
-                    <input type="text" class="form-control" placeholder="Identificacion del dueño o NIT empresa*"
-                      value="" />
+                    <h6>Seleccione Identificacion o NIT : </h6>
+                    <div class="container my-3">
+                      <button @click.prevent="showID" class="btn btn-outline-primary">Numero Identificacion</button>
+                      <button @click.prevent="showNIT" class="btn btn-outline-primary">NIT</button>
+                    </div>
+                    <input v-if="is.id" v-model="ID" type="text" class="form-control"
+                      placeholder="Identificacion del dueÃ±o *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
+                      required />
+                    <input v-if="is.nit" v-model="NIT" type="text" class="form-control" placeholder="NIT empresa*"
+                      pattern="(^[0-9]+-{1}[0-9]{1})" required />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <h6>Fecha de venta del repuesto:</h6>
-                    <input type="date" class="form-control" placeholder="Fecha de venta del repuesto *" value="" />
+                    <input v-model="date" type="date" class="form-control"
+                      placeholder="Fecha de venta del repuesto *" />
                   </div>
                   <div class="form-group">
                     <h6>Repuesto a registrar:</h6>
-                    <select class="form-control">
+                    <select v-model="selected" class="form-control">
                       <option class="hidden" selected disabled>Selecciona el repuesto
                       </option>
                       <option value="aceite">Aceite</option>
@@ -55,6 +65,10 @@
                       <option value="bateria">Bateria</option>
                       <option value="discos frenos">Disco frenos</option>
                     </select>
+                  </div>
+                  <div class="form-group">
+                    <h6>Cantidad</h6>
+                    <input v-model="amount" type="number" class="form-control">
                   </div>
                   <input type="submit" class="btnRegister" value="Registrar" />
                 </div>
@@ -71,6 +85,11 @@
   </div>
 
   </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/main.js"></script>
 </body>
 
 
