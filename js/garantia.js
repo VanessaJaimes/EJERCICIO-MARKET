@@ -6,14 +6,16 @@ var app = new Vue({
     checkbox3: false,
     dateInput: "",
     result: "",
+    selectedIndex:0,
     ids: JSON.parse(localStorage.getItem("resumes")),
+    prnt:false,
   },
   methods: {
     submitForm() {
       if (!this.checkbox1 || !this.checkbox2 || !this.checkbox3) {
         this.result.innerHTML = Swal.fire({
           title:
-            "Por favor acabar con el mantenimiento o revisiones para entrega del vehículo",
+            "Por favor acabar con el mantenimiento o revisiones para entrega del vehículo o selecciona la casilla faltante",
           icon: "error",
           color: "#716add",
           showClass: {
@@ -52,7 +54,13 @@ var app = new Vue({
           });
         }
       }
+
+      
       Init();
     },
+    prt(){
+      this.selectedIndex = (this.selectedIndex + 1)% this.ids.length
+      this.prnt = !this.prnt
+  },
   },
 });
