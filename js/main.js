@@ -44,6 +44,8 @@ var app = new Vue({
     addReplacement() {
       let nameProducts = this.inventory.map(({ name }) => name);
       // console.log(nameProducts);
+      const regExpNIT = /(^[0-9]+-{1}[0-9]{1})/g;
+      const expRegID = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/g;
 
       if (!this.date || this.date == "" || this.date == null) {
         Swal.fire({
@@ -88,7 +90,8 @@ var app = new Vue({
         nameProducts.includes(this.selected) &&
         this.amount > 0 &&
         this.date &&
-        this.ID
+        this.ID &&
+        expRegID.test(this.ID)
       ) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
@@ -156,7 +159,8 @@ var app = new Vue({
         nameProducts.includes(this.selected) &&
         this.amount > 0 &&
         this.date &&
-        this.NIT
+        this.NIT &&
+        regExpNIT.test(this.NIT)
       ) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
@@ -215,6 +219,14 @@ var app = new Vue({
           });
           return false;
         }
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Verifique que el Numero de identificacion o NIT sea valido al formato Colombiano",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
       }
     },
   },
