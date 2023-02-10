@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Automotor</title>
+</head>
+<body>
+    <div >
+        <form @submit.prevent="">
+            <input type="text" placeholder="Nombre del dueño" required v-model="name"> <br> <br>
+            <input type="number" placeholder="Cédula o NIT" required v-model="id"> <br> <br>
+            <label for="date">Fecha de Ingreso:</label> <br>
+            <input type="date" id="date" required v-model="dateOfAdmission"> <br> <br>
+            <label for="falla">Falla Vehículo:</label> <br>
+            <select id="falla" required v-model="failure">
+                <option value="1">Falla 1</option>
+                <option value="2">Falla 2</option>
+                <option value="3">Falla 3</option>
+                <option value="4">Falla 4</option>
+                <option value="5">Falla 5</option>
+            </select> <br><br>
+            <label for="date-delivery">Fecha de Entrega:</label> <br>
+            <input type="date" id="date-delivery" required v-model="deadLine"> <br> <br>
+            <label for="mecanico">Falla Vehículo:</label> <br>
+            <select id="mecanico" required v-model="inCharge">
+                <option value="1">Mecánico 1</option>
+                <option value="2">Mecánico 2</option>
+                <option value="3">Mecánico 3</option>
+                <option value="4">Mecánico 4</option>
+                <option value="5">Mecánico 5</option>
+            </select> <br><br>
+            <button>Enviar</button>
+        </form>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./registroAutomotor.js"></script>
+</body>
+</html>
