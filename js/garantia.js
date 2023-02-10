@@ -12,6 +12,7 @@ var app = new Vue({
   },
   methods: {
     submitForm() {
+      //Comprobar si falta algunos checkbos por verificar y dar aviso de lo faltante
       if (!this.checkbox1 || !this.checkbox2 || !this.checkbox3) {
         this.result.innerHTML = Swal.fire({
           title:
@@ -25,7 +26,7 @@ var app = new Vue({
             popup: "animate__animated animate__fadeOutUp",
           },
         });
-      } else {
+      } else { //se comprueba si está listo el vehículo con un aviso y dandole la garantía de tres meses
         let date = this.ids[0].deadLine
           ? new Date(this.ids[0].deadLine)
           : new Date();
