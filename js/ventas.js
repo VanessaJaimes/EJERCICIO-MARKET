@@ -7,6 +7,7 @@ var app = new Vue({
     date: "",
     ID: "",
     NIT: "",
+    fullName: "",
 
     inventory: [
       { name: "aceite", amount: 10, price: 130000 },
@@ -44,8 +45,42 @@ var app = new Vue({
     addReplacement() {
       let nameProducts = this.inventory.map(({ name }) => name);
       // console.log(nameProducts);
-      const regExpNIT = /(^[0-9]+-{1}[0-9]{1})/g;
+      // Expresiones regulares
       const expRegID = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/g;
+      const regExpNIT = /(^[0-9]+-{1}[0-9]{1})/g;
+
+      const expRegFullName =
+        /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
+      const regExpCompany = /^[a-zA-Z0-9\s][^|=]*$/g;
+
+      if (
+        !this.fullName ||
+        this.fullName == "" ||
+        this.fullName == null ||
+        (this.is.id && !expRegFullName.test(this.fullName) && !this.is.nit)
+      ) {
+        Swal.fire({
+          title: "Error",
+          text: "Nombre Invalido",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
+      }
+      if (
+        !this.fullName ||
+        this.fullName == "" ||
+        this.fullName == null ||
+        (this.is.nit && !regExpCompany.test(this.fullName) && !this.is.id)
+      ) {
+        Swal.fire({
+          title: "Error",
+          text: "Nombre  Empresa Invalido",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
+      }
 
       if (!this.date || this.date == "" || this.date == null) {
         Swal.fire({
@@ -56,6 +91,7 @@ var app = new Vue({
         });
         return false;
       }
+
       if (
         !this.selected ||
         this.selected == "" ||
@@ -91,7 +127,8 @@ var app = new Vue({
         this.amount > 0 &&
         this.date &&
         this.ID &&
-        expRegID.test(this.ID)
+        expRegID.test(this.ID) &&
+        this.fullName
       ) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
@@ -112,6 +149,7 @@ var app = new Vue({
           localStorage.setItem("inventory", JSON.stringify(this.inventory));
 
           this.productsSelected.push({
+            fullName: this.fullName.toUpperCase(),
             id: parseInt(this.ID),
             name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
@@ -121,10 +159,11 @@ var app = new Vue({
           });
 
           localStorage.setItem(
-            "productSell",
+            "productSales",
             JSON.stringify(this.productsSelected)
           );
 
+          this.fullName = "";
           this.amount = 0;
           this.selected = null;
           this.ID = "";
@@ -160,7 +199,8 @@ var app = new Vue({
         this.amount > 0 &&
         this.date &&
         this.NIT &&
-        regExpNIT.test(this.NIT)
+        regExpNIT.test(this.NIT) &&
+        this.fullName
       ) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
@@ -181,6 +221,7 @@ var app = new Vue({
           localStorage.setItem("inventory", JSON.stringify(this.inventory));
 
           this.productsSelected.push({
+            fullName: this.fullName.toUpperCase(),
             NIT: this.NIT,
             name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
@@ -190,10 +231,11 @@ var app = new Vue({
           });
 
           localStorage.setItem(
-            "productSell",
+            "productSales",
             JSON.stringify(this.productsSelected)
           );
 
+          this.fullName = "";
           this.amount = 0;
           this.selected = null;
           this.ID = "";
@@ -232,11 +274,11 @@ var app = new Vue({
   },
 
   created() {
-    let productSell = JSON.parse(localStorage.getItem("productSell"));
+    let productSales = JSON.parse(localStorage.getItem("productSales"));
     let inventory = JSON.parse(localStorage.getItem("inventory"));
 
-    if (productSell != null) {
-      this.productsSelected = productSell;
+    if (productSales != null) {
+      this.productsSelected = productSales;
     }
     if (inventory != null) {
       this.inventory = inventory;

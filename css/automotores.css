@@ -1,6 +1,6 @@
 .register {
   background: -webkit-linear-gradient(left, #111c55, #4e937a);
-  margin-top: 3%;
+  /* margin-top: 3%; */
   padding: 3%;
 }
 
@@ -10,7 +10,7 @@
   margin-top: 4%;
 }
 
-.register-left input {
+.register-left button {
   border: none;
   border-radius: 1.5rem;
   padding: 2%;
