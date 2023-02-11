@@ -8,6 +8,7 @@ var app = new Vue({
     ID: "",
     NIT: "",
     name:"",
+    priceReplacement:0,
     inventory: [
       { name: "aceite", amount: 10, price: 30000 },
       { name: "empaque", amount: 100, price: 2500 },
@@ -71,6 +72,7 @@ var app = new Vue({
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
             if (this.amount <= item.amount) {
+              this.priceReplacement=item.price
               return item;
             }
           }
@@ -81,7 +83,9 @@ var app = new Vue({
             id: parseInt(this.ID),
             nameReplacement: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
+            price:parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
+            total:parseInt(this.priceReplacement)*parseInt(`${this.amount}`)
           });
 
           localStorage.setItem(
