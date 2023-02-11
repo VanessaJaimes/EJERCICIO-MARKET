@@ -10,7 +10,7 @@ createApp({
         deadLine:'',
         inCharge:'', //Encargado de la reparación
 
-        spareParts:'', //Variable que habilita la redirrecicón.
+        spareParts:'ok', //Variable que habilita la redirrecicón.
         resumes:[], //Esta es la base de datos con las hojas de vida
 
         //Variable habilitar NIT o Cédula
@@ -96,9 +96,13 @@ createApp({
           inCharge:this.inCharge, 
 
         }
+        this.successfulAlert()
         this.resumes.push(resume)
         localStorage.setItem("resumes",JSON.stringify(this.resumes)) //Actualizo en el LocalStorage la data.
-        this.successfulAlert()
+        localStorage.setItem("is",JSON.stringify(this.is))
+        localStorage.setItem("id",this.id)
+        localStorage.setItem("name",this.name)
+        localStorage.setItem("deadLine",this.deadLine)
         this.resetForm()
         if(this.spareParts==="ok"){
           location.href="respuestos.html"
