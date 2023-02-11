@@ -8,23 +8,27 @@ var app = new Vue({
     ID: "",
     NIT: "",
     name:"",
-    priceReplacement:0,
+    price:0,
     inventory: [
-      { name: "aceite", amount: 10, price: 30000 },
-      { name: "empaque", amount: 100, price: 2500 },
-      { name: "llanta", amount: 20, price: 100000 },
-      { name: "bateria", amount: 100, price: 50000 },
-      { name: "discos frenos", amount: 40, price: 30000 },
+      { name: "aceite", amount: 10, price: 130000 },
+      { name: "empaque", amount: 100, price: 56000 },
+      { name: "llanta", amount: 20, price: 198400 },
+      { name: "bateria", amount: 100, price: 289900 },
+      { name: "discos frenos", amount: 40, price: 650000 },
     ],
 
     is: {
       id: false,
       nit: false,
     },
+
   },
 
   methods: {
     addReplacement() {
+      let nameProducts = this.inventory.map(({ name }) => name);
+      // console.log(nameProducts);
+
       if (!this.date || this.date == "" || this.date == null) {
         Swal.fire({
           title: "Error",
@@ -34,7 +38,12 @@ var app = new Vue({
         });
         return false;
       }
-      if (!this.selected || this.selected == "" || this.selected == null) {
+      if (
+        !this.selected ||
+        this.selected == "" ||
+        this.selected == null ||
+        !nameProducts.includes(this.selected)
+      ) {
         Swal.fire({
           title: "Error",
           text: "Seleccione un repuesto",
@@ -58,13 +67,9 @@ var app = new Vue({
         return false;
       }
 
-      // if-cedula
+      // cedula
       if (
-        (this.selected === "aceite" ||
-          this.selected === "empaque" ||
-          this.selected === "llanta" ||
-          this.selected === "bateria" ||
-          this.selected === "discos frenos") &&
+        nameProducts.includes(this.selected) &&
         this.amount > 0 &&
         this.date &&
         this.ID
@@ -79,9 +84,17 @@ var app = new Vue({
         });
 
         if (isAvailable.length > 0) {
+          this.inventory.forEach((el) => {
+            if (el.name === this.selected) {
+              return (el.amount -= this.amount);
+            }
+          });
+          // console.log(this.inventory, this.amount);
+          localStorage.setItem("inventory", JSON.stringify(this.inventory));
+
           this.productsSelected.push({
             id: parseInt(this.ID),
-            nameReplacement: `${this.selected}`,
+            name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
             price:parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
@@ -120,13 +133,11 @@ var app = new Vue({
           return false;
         }
 
-        console.log(this.productsSelected);
+        // console.log(this.productsSelected);
+
+        // NIT
       } else if (
-        (this.selected === "aceite" ||
-          this.selected === "empaque" ||
-          this.selected === "llanta" ||
-          this.selected === "bateria" ||
-          this.selected === "discos frenos") &&
+        nameProducts.includes(this.selected) &&
         this.amount > 0 &&
         this.date &&
         this.NIT
@@ -134,17 +145,28 @@ var app = new Vue({
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
             if (this.amount <= item.amount) {
+              this.price = item.price;
               return item;
             }
           }
         });
 
         if (isAvailable.length > 0) {
+          this.inventory.forEach((el) => {
+            if (el.name === this.selected) {
+              return (el.amount -= this.amount);
+            }
+          });
+          // console.log(this.inventory, this.amount);
+          localStorage.setItem("inventory", JSON.stringify(this.inventory));
+
           this.productsSelected.push({
             NIT: this.NIT,
-            nameReplacement: `${this.selected}`,
+            name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
+            price: parseInt(`${this.price}`),
+            totalPrice: parseInt(`${this.price * this.amount}`),
           });
 
           localStorage.setItem(
@@ -177,14 +199,13 @@ var app = new Vue({
           });
           return false;
         }
-
-        console.log(this.productsSelected);
       }
     },
   },
 
   created() {
     let productSell = JSON.parse(localStorage.getItem("productSell"));
+    let inventory = JSON.parse(localStorage.getItem("inventory"));
 
     if (productSell != null) {
       this.productsSelected = productSell;
@@ -201,6 +222,9 @@ var app = new Vue({
     this.name=localStorage.getItem("name")
     this.date=localStorage.getItem("deadLine")
     
+    if (inventory != null) {
+      this.inventory = inventory;
+    }
 
   },
 });
