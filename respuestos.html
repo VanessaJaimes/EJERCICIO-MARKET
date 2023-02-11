@@ -24,7 +24,7 @@
           <img src="img/mecanica.png" alt="" />
           <h3>Bienvenid@</h3>
           <p>Registro de repuestos de automotores.</p>
-          <a href="./inicio.html" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Salir</a>
+          <input type="submit" name="" value="Salir" @click="location.href='./inicio.html'"/><br />
         </div>
 
         <div class="col-md-9 register-right">
@@ -36,16 +36,38 @@
               <form @submit.prevent="addReplacement" class="row register-form">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <h6>Seleccione Identificacion o NIT : </h6>
-                    <div class="container my-3">
-                      <button @click.prevent="showID" class="btn btn-outline-primary">Numero Identificacion</button>
-                      <button @click.prevent="showNIT" class="btn btn-outline-primary">NIT</button>
+                    
+                   <div v-if="is.id">
+                    
+                    <label for="nombre" class="h6">Nombre Cliente:</label>
+                    <input type="text" class="form-control" id="nombre" v-model="name" readonly>
+                    
+                    <label for="cedula" class="h6">Identificacion Dueño:</label>
+                    <input
+                      v-model="ID"
+                      type="text"
+                      class="form-control"
+                      placeholder="Identificacion del dueño *"
+                      pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
+                      required
+                      id="cedula"
+                      readonly />
+                   </div>
+                    <div v-if="is.nit">
+                    <label for="nombre-nit" class="h6">Nombre Cliente:</label>
+                    <input type="text" class="form-control" id="nombre-nit" v-model="name" readonly>
+                     <label for="NIT" class="h6">NIT de la empresa:</label>
+                     <input
+                       v-model="NIT"
+                       type="text"
+                       class="form-control"
+                       placeholder="NIT empresa*"
+                       pattern="(^[0-9]+-{1}[0-9]{1})"
+                       required
+                       id="NIT"
+                       readonly />
                     </div>
-                    <input v-if="is.id" v-model="ID" type="text" class="form-control"
-                      placeholder="Numero Identificacion *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
-                      required />
-                    <input v-if="is.nit" v-model="NIT" type="text" class="form-control" placeholder="NIT empresa*"
-                      pattern="(^[0-9]+-{1}[0-9]{1})" required />
+                    
                   </div>
                 </div>
                 <div class="col-md-6">

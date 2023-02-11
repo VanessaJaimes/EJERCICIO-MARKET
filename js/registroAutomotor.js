@@ -3,19 +3,38 @@ const { createApp } = Vue
 createApp({
     data() {
       return {
-        name:'',
-        id:'',
+        name:'', // TODO: Opcional llevarla al local Storage
+        id:'', //TODO:exportarlas al local Storage
         dateOfAdmission:'', //Fecha ingreso vehículo
         failure:'', //Falla del vehículo
         deadLine:'',
         inCharge:'', //Encargado de la reparación
 
-        spareParts:true, //TODO: esta variable debe enlazarse con el radio button, es la que habilita el modal de repuestos.
+        spareParts:'ok', //Variable que habilita la redirrecicón.
         resumes:[], //Esta es la base de datos con las hojas de vida
+
+        //Variable habilitar NIT o Cédula
+        is: {  //TODO: Exportarlas al local Storage
+          id: false,
+          nit: false,
+        }
 
       }
     },
     methods:{
+      //Métodos para habilitar el input de ID o cédula.
+      showID() {
+        this.is = {
+          id: true,
+          nit: false,
+        }
+      },
+  
+      showNIT() {
+        this.is = {
+          id: false,
+          nit: true,
+        }},
       errorAlert(msg){
         Swal.fire({
           icon: 'error',
@@ -35,7 +54,7 @@ createApp({
       validateData(){
         //Validación todos los campos llenos
         const fullFields=(this.name!="" && this.id !='' && this.dateOfAdmission!="" && this.failure!=""
-          && this.deadLine!="" && this.inCharge!="")
+          && this.deadLine!="" && this.inCharge!="" && this.spareParts!="")
         if(!fullFields){
           this.errorAlert("Recuerde digitar todos los campos del formulario")
           return false
@@ -61,6 +80,7 @@ createApp({
         this.failure=''
         this.deadLine=''
         this.inCharge=''
+       
       },
       registerResume(){
         const correctData=this.validateData()
@@ -76,11 +96,19 @@ createApp({
           inCharge:this.inCharge, 
 
         }
+        this.successfulAlert()
         this.resumes.push(resume)
         localStorage.setItem("resumes",JSON.stringify(this.resumes)) //Actualizo en el LocalStorage la data.
-        this.successfulAlert()
-
+        localStorage.setItem("is",JSON.stringify(this.is))
+        localStorage.setItem("id",this.id)
+        localStorage.setItem("name",this.name)
+        localStorage.setItem("deadLine",this.deadLine)
         this.resetForm()
+        if(this.spareParts==="ok"){
+          location.href="respuestos.html"
+        }
+        
+       
         console.log(this.resumes) //Saco por consola la base de datos con los registros
 
       }
