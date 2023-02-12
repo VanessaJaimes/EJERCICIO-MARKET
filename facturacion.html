@@ -43,11 +43,11 @@
                                             <button @click.prevent="showID" class="btn btn-outline-primary mr-2 mb-2">Numero Identificacion</button>
                                             <button @click.prevent="showNIT" class="btn btn-outline-primary  mb-2">NIT</button>
                                         </div>
-                                        <form @submit.prevent="findAccounts">
+                                        <form @submit.prevent="billing">
                                           <input v-if="is.id" v-model="id" type="text" class="form-control"
                                             placeholder="Identificacion del dueño *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
                                             required />
-                                          <input v-if="is.nit" v-model="id" type="text" class="form-control" placeholder="NIT empresa*"
+                                          <input v-if="is.nit" v-model="nit" type="text" class="form-control" placeholder="NIT empresa*"
                                             pattern="(^[0-9]+-{1}[0-9]{1})" required />
                                        
                                             <input type="submit" class="btnRegister" value="Generar Factura"  />

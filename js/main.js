@@ -101,7 +101,8 @@ var app = new Vue({
             amount: parseInt(`${this.amount}`),
             price:parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
-            total:parseInt(this.priceReplacement)*parseInt(`${this.amount}`)
+            total:parseInt(this.priceReplacement)*parseInt(`${this.amount}`),
+            customer:this.name
           });
 
           localStorage.setItem(
@@ -171,6 +172,7 @@ var app = new Vue({
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
             price: parseInt(`${this.price}`),
             totalPrice: parseInt(`${this.price * this.amount}`),
+            customer:this.name
           });
 
           localStorage.setItem(
