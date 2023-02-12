@@ -93,6 +93,7 @@ createApp({
       resetForm(){
         this.name=''
         this.id=''
+        this.nit=''
         this.dateOfAdmission=''
         this.failure=''
         this.deadLine=''
@@ -104,20 +105,22 @@ createApp({
         if(!correctData){
           return //Si los datos no son correctos no haga nada.
         }
+        let propiedad=(this.id)?"id":"NIT"
         const resume={
-          name:this.name,
-          id:this.id,
+          name:this.name, //TODO: Hay que enviar un id o un nit según se hayan ingresado los datos.
           dateOfAdmission:this.dateOfAdmission,
           failure:this.failure,
           deadLine:this.deadLine,
           inCharge:this.inCharge, 
 
         }
+        resume[propiedad]=this.id||this.nit
         this.successfulAlert()
         this.resumes.push(resume)
         localStorage.setItem("resumes",JSON.stringify(this.resumes)) //Actualizo en el LocalStorage la data.
         localStorage.setItem("is",JSON.stringify(this.is))
         localStorage.setItem("id",this.id)
+        localStorage.setItem("NIT",this.nit)
         localStorage.setItem("name",this.name)
         localStorage.setItem("deadLine",this.deadLine)
         this.resetForm()

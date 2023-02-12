@@ -229,7 +229,7 @@ var app = new Vue({
       this.ID=localStorage.getItem("id")
     }
     if(this.is.nit){
-      this.NIT=localStorage.getItem("id")
+      this.NIT=localStorage.getItem("NIT")
     }
     this.name=localStorage.getItem("name")
     this.date=localStorage.getItem("deadLine")
