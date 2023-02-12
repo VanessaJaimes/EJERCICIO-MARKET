@@ -14,8 +14,10 @@
 </head>
 
 <body>
-    <div class="container register" id="app">
+    <div class="container register" id="facturacion">
+      
         <div class="row">
+            
             <div class="col-md-3 register-left">
                 <img src="img/mecanica.png" alt="" />
                 <h3>Bienvenid@</h3>
@@ -35,17 +37,22 @@
                                 </div> -->
                                 <div class="form-group">
                                     <h6>Identificacion del dueño o NIT empresa: </h6>
-                                    <div class="container my-3 p-0 ">
-                                      <button @click.prevent="showID" class="btn btn-outline-primary mr-2 mb-2">Numero Identificacion</button>
-                                      <button @click.prevent="showNIT" class="btn btn-outline-primary  mb-2">NIT</button>
-                                    </div>
-                                    <input v-if="is.id" v-model="id" type="text" class="form-control"
-                                      placeholder="Identificacion del dueño *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
-                                      required />
-                                    <input v-if="is.nit" v-model="id" type="text" class="form-control" placeholder="NIT empresa*"
-                                      pattern="(^[0-9]+-{1}[0-9]{1})" required />
-                                  </div>
-                                <input type="submit" class="btnRegister" value="Generar Factura" @click="registerResume" />
+                                    
+                                   
+                                        <div class="container my-3 p-0 ">
+                                            <button @click.prevent="showID" class="btn btn-outline-primary mr-2 mb-2">Numero Identificacion</button>
+                                            <button @click.prevent="showNIT" class="btn btn-outline-primary  mb-2">NIT</button>
+                                        </div>
+                                        <form @submit.prevent="findAccounts">
+                                          <input v-if="is.id" v-model="id" type="text" class="form-control"
+                                            placeholder="Identificacion del dueño *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
+                                            required />
+                                          <input v-if="is.nit" v-model="id" type="text" class="form-control" placeholder="NIT empresa*"
+                                            pattern="(^[0-9]+-{1}[0-9]{1})" required />
+                                       
+                                            <input type="submit" class="btnRegister" value="Generar Factura"  />
+                                        </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +67,7 @@
     </div>
     <!-- CDN de Vue -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="./js/registroAutomotor.js"></script>
+    <script src="./js/facturacion.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 

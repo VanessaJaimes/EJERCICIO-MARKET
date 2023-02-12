@@ -6,4 +6,4 @@ const { createApp } = Vue
         message: 'Hello Vue!'
       }
     }
-  }).mount('#facturacion')
+  }).mount('#factura')

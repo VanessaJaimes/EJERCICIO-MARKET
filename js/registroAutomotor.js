@@ -4,7 +4,8 @@ createApp({
     data() {
       return {
         name:'', // TODO: Opcional llevarla al local Storage
-        id:'', //TODO:exportarlas al local Storage
+        id:'', //TODO:exportar al local Storage
+        nit:'', //TODO:exportar al local Storage
         dateOfAdmission:'', //Fecha ingreso vehículo
         failure:'', //Falla del vehículo
         deadLine:'',
@@ -53,17 +54,33 @@ createApp({
       },
       validateData(){
         //Validación todos los campos llenos
-        const fullFields=(this.name!="" && this.id !='' && this.dateOfAdmission!="" && this.failure!=""
+        const fullFields=(this.name!="" && (this.id !='' || this.nit!='' )&& this.dateOfAdmission!="" && this.failure!=""
           && this.deadLine!="" && this.inCharge!="" && this.spareParts!="")
         if(!fullFields){
           this.errorAlert("Recuerde digitar todos los campos del formulario")
           return false
         }
+
+
+
         //Validación en CC o NIT
-        if(this.id.toString().length<8){
-          this.errorAlert("La identificación o el NIT debe tener al menos 8 dígitos")
-          return false
+        if(this.id!=''){
+          const expRegID = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/g
+          if(!expRegID.test(this.id.toString())){
+            this.errorAlert("Ingrese una cédula válida")
+            return false
+          }}
+        else if(this.nit!=''){
+          const expRegNIT = /(^[0-9]+-{1}[0-9]{1})/g
+          if(!expRegNIT.test(this.nit.toString())){
+            this.errorAlert("Ingrese un NIT con formato válido")
+            return false
+          }
         }
+   
+       
+
+
         //Validación Para que la fecha de entrega no sea una fecha antes de la fecha de ingreso.
         const dateOfAdmissionSeconds=new Date(this.dateOfAdmission).getTime()
         const deadLineSeconds=new Date(this.deadLine).getTime()
