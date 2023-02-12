@@ -7,8 +7,8 @@ var app = new Vue({
     date: "",
     ID: "",
     NIT: "",
-    name:"",
-    price:0,
+    fullName: "",
+
     inventory: [
       { name: "aceite", amount: 10, price: 130000 },
       { name: "empaque", amount: 100, price: 56000 },
@@ -22,14 +22,65 @@ var app = new Vue({
       nit: false,
     },
 
+    price: 0,
   },
 
   methods: {
+    showID() {
+      this.is = {
+        id: true,
+        nit: false,
+      };
+      this.NIT = "";
+    },
+
+    showNIT() {
+      this.is = {
+        id: false,
+        nit: true,
+      };
+      this.ID = "";
+    },
+
     addReplacement() {
       let nameProducts = this.inventory.map(({ name }) => name);
       // console.log(nameProducts);
-      const regExpNIT = /(^[0-9]+-{1}[0-9]{1})/g;
+      // Expresiones regulares
       const expRegID = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/g;
+      const regExpNIT = /(^[0-9]+-{1}[0-9]{1})/g;
+
+      const expRegFullName =
+        /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
+      const regExpCompany = /^[a-zA-Z0-9\s][^|=]*$/g;
+
+      if (
+        !this.fullName ||
+        this.fullName == "" ||
+        this.fullName == null ||
+        (this.is.id && !expRegFullName.test(this.fullName) && !this.is.nit)
+      ) {
+        Swal.fire({
+          title: "Error",
+          text: "Nombre Invalido",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
+      }
+      if (
+        !this.fullName ||
+        this.fullName == "" ||
+        this.fullName == null ||
+        (this.is.nit && !regExpCompany.test(this.fullName) && !this.is.id)
+      ) {
+        Swal.fire({
+          title: "Error",
+          text: "Nombre  Empresa Invalido",
+          icon: "error",
+          confirmButtonText: "Cerrar",
+        });
+        return false;
+      }
 
       if (!this.date || this.date == "" || this.date == null) {
         Swal.fire({
@@ -40,6 +91,7 @@ var app = new Vue({
         });
         return false;
       }
+
       if (
         !this.selected ||
         this.selected == "" ||
@@ -75,12 +127,13 @@ var app = new Vue({
         this.amount > 0 &&
         this.date &&
         this.ID &&
-        expRegID.test(this.ID)
+        expRegID.test(this.ID) &&
+        this.fullName
       ) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
             if (this.amount <= item.amount) {
-              this.priceReplacement=item.price
+              this.price = item.price;
               return item;
             }
           }
@@ -96,28 +149,30 @@ var app = new Vue({
           localStorage.setItem("inventory", JSON.stringify(this.inventory));
 
           this.productsSelected.push({
+            fullName: this.fullName.toUpperCase(),
             id: parseInt(this.ID),
             name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
-            price:parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
-            total:parseInt(this.priceReplacement)*parseInt(`${this.amount}`)
+            price: parseInt(`${this.price}`),
+            totalPrice: parseInt(`${this.price * this.amount}`),
           });
 
           localStorage.setItem(
-            "productSell",
+            "productSales",
             JSON.stringify(this.productsSelected)
           );
 
+          this.fullName = "";
           this.amount = 0;
           this.selected = null;
-          // this.ID = "";
-          // this.NIT = "";
-          // this.date = "";
-          // this.is = {
-          //   id: false,
-          //   nit: false,
-          // };
+          this.ID = "";
+          this.NIT = "";
+          this.date = "";
+          this.is = {
+            id: false,
+            nit: false,
+          };
 
           Swal.fire({
             position: "center",
@@ -144,7 +199,8 @@ var app = new Vue({
         this.amount > 0 &&
         this.date &&
         this.NIT &&
-        regExpNIT.test(this.NIT)
+        regExpNIT.test(this.NIT) &&
+        this.fullName
       ) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
@@ -165,6 +221,7 @@ var app = new Vue({
           localStorage.setItem("inventory", JSON.stringify(this.inventory));
 
           this.productsSelected.push({
+            fullName: this.fullName.toUpperCase(),
             NIT: this.NIT,
             name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
@@ -174,19 +231,20 @@ var app = new Vue({
           });
 
           localStorage.setItem(
-            "productSell",
+            "productSales",
             JSON.stringify(this.productsSelected)
           );
 
+          this.fullName = "";
           this.amount = 0;
           this.selected = null;
-          // this.ID = "";
-          // this.NIT = "";
-          // this.date = "";
-          // this.is = {
-          //   id: false,
-          //   nit: false,
-          // };
+          this.ID = "";
+          this.NIT = "";
+          this.date = "";
+          this.is = {
+            id: false,
+            nit: false,
+          };
           Swal.fire({
             position: "center",
             icon: "success",
@@ -216,27 +274,14 @@ var app = new Vue({
   },
 
   created() {
-    let productSell = JSON.parse(localStorage.getItem("productSell"));
+    let productSales = JSON.parse(localStorage.getItem("productSales"));
     let inventory = JSON.parse(localStorage.getItem("inventory"));
 
-    if (productSell != null) {
-      this.productsSelected = productSell;
+    if (productSales != null) {
+      this.productsSelected = productSales;
     }
-    if(JSON.parse(localStorage.getItem("is"))===null) return
-
-    this.is=JSON.parse(localStorage.getItem("is"))
-    if(this.is.id){
-      this.ID=localStorage.getItem("id")
-    }
-    if(this.is.nit){
-      this.NIT=localStorage.getItem("id")
-    }
-    this.name=localStorage.getItem("name")
-    this.date=localStorage.getItem("deadLine")
-    
     if (inventory != null) {
       this.inventory = inventory;
     }
-
   },
 });
