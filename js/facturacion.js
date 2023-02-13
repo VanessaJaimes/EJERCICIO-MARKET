@@ -41,9 +41,10 @@ const { createApp } = Vue
           },
           generateInformation(productSales,productSell,resumes,code){
             //LLeno los repuestos que se han gastado en el usuario.
-            console.log('repuestos directos:',productSales)
-            console.log('repuestos de reparaciones',productSell)
+            // console.log('repuestos directos:',productSales)
+            // console.log('repuestos de reparaciones',productSell)
             const vehicleParts=[]
+            let data=[] //Esta es la info que va para la factura
             if(productSales){
                 productSales?.forEach(product => {
                     vehicleParts.push(
@@ -70,7 +71,7 @@ const { createApp } = Vue
             }
             
             if(resumes){
-                const data={
+                 data={
                     name:resumes[0].name ,
                     dateOfAdmission:resumes[0].dateOfAdmission,
                     deadLine:resumes[0].deadLine,
@@ -79,19 +80,22 @@ const { createApp } = Vue
                     vehicleParts
                 }
                 data[code]=resumes[0].id||resumes[0].NIT
-                console.log(data)
+                
             }else if(!resumes && productSales){
-                const data={
+                 data={
                     name: productSales[0].fullName,
                     date:productSales[0].date,
                     vehicleParts
                 }
                 data[code]=productSales[0].id||productSales[0].NIT
-                console.log(data)
+                
             }
-        
+            localStorage.setItem("data",JSON.stringify(data))
             this.id=''
             this.nit=''
+            location.href="./factura.html"
+            
+            
             
 
           },
@@ -101,6 +105,7 @@ const { createApp } = Vue
             this.productSell=this.productSellTotal?.filter(el=>el.id===Number(this.id))
             this.resumes=this.resumesTotal?.filter(el=>el.id===this.id)
             if(this.productSales?.length!=0 || this.productSell?.length!=0 ||this.resumes?.length!=0 ){
+                //Si entra aquí es porque hay algo por facturar
                 this.generateInformation(this.productSales,this.productSell,this.resumes,"id")
             }else{
                 Swal.fire({
@@ -116,6 +121,7 @@ const { createApp } = Vue
             this.productSell=this.productSellTotal?.filter(el=>el.NIT===this.nit)
             this.resumes=this.resumesTotal?.filter(el=>el.NIT===this.nit)
             if(this.productSales?.length!=0 || this.productSell?.length!=0 ||this.resumes?.length!=0 ){
+                //Si entra aquí es porque hay algo por facturar
                 this.generateInformation(this.productSales,this.productSell,this.resumes,"NIT")
             }else{
                 Swal.fire({

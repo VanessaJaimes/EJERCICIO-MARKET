@@ -3,7 +3,11 @@ const { createApp } = Vue
   createApp({
     data() {
       return {
-        message: 'Hello Vue!'
+        data:{}
+
       }
+    },
+    mounted(){
+        this.data=JSON.parse(localStorage.getItem("data"))
     }
   }).mount('#factura')
