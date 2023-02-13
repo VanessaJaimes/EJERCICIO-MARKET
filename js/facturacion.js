@@ -33,11 +33,13 @@ const { createApp } = Vue
               id: false,
               nit: true,
             }},
-          validateId(){
-            //TODO: Validaciones del ID desde el JS.
+          validateId(id){
+            const expRegID = /^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$/g
+            return expRegID.test(id)
           },
-          validateNIT(){
-            //TODO: Validaciones del NIT desde el JS.
+          validateNIT(nit){
+            const expRegNIT = /(^[0-9]+-{1}[0-9]{1})/g
+            return expRegNIT.test(nit)
           },
           generateInformation(productSales,productSell,resumes,code){
             //LLeno los repuestos que se han gastado en el usuario.
@@ -100,6 +102,7 @@ const { createApp } = Vue
 
           },
           findAccountsId(){
+            if(!this.validateId(this.id)) return
             // console.log("Entro a los ID")
             this.productSales=this.productSalesTotal?.filter(el=>el.id===Number(this.id))
             this.productSell=this.productSellTotal?.filter(el=>el.id===Number(this.id))
@@ -116,6 +119,7 @@ const { createApp } = Vue
             }      
          },
          findAccountsNIT(){
+            if(!this.validateNIT(this.nit)) return
             // console.log("Entró a lo de los NIT")
             this.productSales=this.productSalesTotal?.filter(el=>el.NIT===this.nit)
             this.productSell=this.productSellTotal?.filter(el=>el.NIT===this.nit)
