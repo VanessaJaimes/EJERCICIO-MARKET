@@ -270,6 +270,12 @@ var app = new Vue({
         });
         return false;
       }
+
+      setTimeout(()=> {
+        if(this.addReplacement){
+          location.href="facturaVenta.html";
+        }
+      },1600);
     },
   },
 

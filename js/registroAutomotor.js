@@ -110,7 +110,7 @@ createApp({
         
        
         console.log(this.resumes) //Saco por consola la base de datos con los registros
-
+        
       }
     },
     mounted(){
