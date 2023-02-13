@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Facturacion</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/automotores.css" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/img/mecanica.png">
+</head>
+
+<body>
+    <div class="container register" id="app">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="img/mecanica.png" alt="" />
+                <h3>Bienvenid@</h3>
+                <p>Ingresa tu identificacion del dueño o NIT empresa y genera tu factura.</p>
+                <a href="./inicio.html" class="btn btn-secondary" tabindex="-1" role="button" aria-disabled="true">Salir</a>
+            </div>
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Facturacion</h3>
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <!-- <div class="form-group">
+                                    <h6>Identificacion del dueño o NIT empresa:</h6>
+                                    <input type="number" class="form-control"
+                                        placeholder="Identificacion del dueño o NIT empresa*" v-model="id" />
+                                </div> -->
+                                <div class="form-group">
+                                    <h6>Identificacion del dueño o NIT empresa: </h6>
+                                    <div class="container my-3 p-0 ">
+                                      <button @click.prevent="showID" class="btn btn-outline-primary mr-2 mb-2">Numero Identificacion</button>
+                                      <button @click.prevent="showNIT" class="btn btn-outline-primary  mb-2">NIT</button>
+                                    </div>
+                                    <input v-if="is.id" v-model="id" type="text" class="form-control"
+                                      placeholder="Identificacion del dueño *" pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
+                                      required />
+                                    <input v-if="is.nit" v-model="id" type="text" class="form-control" placeholder="NIT empresa*"
+                                      pattern="(^[0-9]+-{1}[0-9]{1})" required />
+                                  </div>
+                                <input type="submit" class="btnRegister" value="Generar Factura" @click="registerResume" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+    </div>
+    <!-- CDN de Vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./js/registroAutomotor.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+<script src="./garantia.js"></script>
+
+</html>
