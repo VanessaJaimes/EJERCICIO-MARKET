@@ -101,7 +101,7 @@ var app = new Vue({
             amount: parseInt(`${this.amount}`),
             price:parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
-            total:parseInt(this.priceReplacement)*parseInt(`${this.amount}`),
+            totalPrice:parseInt(this.priceReplacement)*parseInt(`${this.amount}`),
             customer:this.name
           });
 

@@ -50,7 +50,7 @@
                                           <input v-if="is.nit" v-model="nit" type="text" class="form-control" placeholder="NIT empresa*"
                                             pattern="(^[0-9]+-{1}[0-9]{1})" required />
                                        
-                                            <input type="submit" class="btnRegister" value="Generar Factura"  />
+                                            <input type="submit" class="btnRegister" value="Generar Factura" v-if="is.id || is.nit" />
                                         </form>
                                 </div>
                             </div>
