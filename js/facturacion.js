@@ -42,13 +42,35 @@ const { createApp } = Vue
             return expRegNIT.test(nit)
           },
           generateInformation(productSales,productSell,resumes,code){
-            //LLeno los repuestos que se han gastado en el usuario.
-            // console.log('repuestos directos:',productSales)
-            // console.log('repuestos de reparaciones',productSell)
+            if(productSales===undefined && productSell?.length===0 && resumes?.length===0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El número digitado no tiene cuentas pendientes',
+              })
+              return
+            }
+            if(productSales?.length===0 && productSell===undefined && resumes===undefined){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El número digitado no tiene cuentas pendientes',
+              })
+              return
+            }
+            if(productSales===undefined ){
+              productSales=[]
+            }
+            if(productSell===undefined){
+              productSell=[]
+            }
+            if(resumes===undefined){
+              resumes=[]
+            }
             const vehicleParts=[]
             let data=[] //Esta es la info que va para la factura
-            if(productSales){
-                productSales?.forEach(product => {
+            if(productSales.length>0){
+                productSales.forEach(product => {
                     vehicleParts.push(
                             {
                              name:product.name,
@@ -59,7 +81,7 @@ const { createApp } = Vue
                         )
                 });
             }
-            if(productSell){
+            if(productSell.length>0){
                 productSell?.forEach(product => {
                     vehicleParts.push(
                             {
@@ -72,7 +94,7 @@ const { createApp } = Vue
                 });
             }
             
-            if(resumes){
+            if(resumes.length>0){
                  data={
                     name:resumes[0].name ,
                     dateOfAdmission:resumes[0].dateOfAdmission,
@@ -83,7 +105,7 @@ const { createApp } = Vue
                 }
                 data[code]=resumes[0].id||resumes[0].NIT
                 
-            }else if(!resumes && productSales){
+            }else if(resumes.length===0 && productSales.length>0){
                  data={
                     name: productSales[0].fullName,
                     date:productSales[0].date,
