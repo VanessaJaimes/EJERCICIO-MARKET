@@ -90,6 +90,11 @@
                                         <option>Jasser Leney Blanco</option>
                                     </select>
                                 </div>
+                                <div class="mt-3 mb-3" v-if="spareParts==='no'">
+                                    <label for="exampleInputEmail1" class="h6">Trabajo realizado en el vehículo:</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="workDone" required>
+                                    <div id="emailHelp" class="form-text">Esta es la descripción de la reparación  que realizó el mecánico.</div>
+                                </div>
                                 <input type="submit" class="btnRegister" value="Registrar" @click="registerResume" />
                             </div>
                         </div>

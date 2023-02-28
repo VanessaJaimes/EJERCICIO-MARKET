@@ -3,9 +3,9 @@ const { createApp } = Vue
 createApp({
     data() {
       return {
-        name:'', // TODO: Opcional llevarla al local Storage
-        id:'', //TODO:exportar al local Storage
-        nit:'', //TODO:exportar al local Storage
+        name:'', 
+        id:'', 
+        nit:'', 
         dateOfAdmission:'', //Fecha ingreso vehículo
         failure:'', //Falla del vehículo
         deadLine:'',
@@ -15,10 +15,11 @@ createApp({
         resumes:[], //Esta es la base de datos con las hojas de vida
 
         //Variable habilitar NIT o Cédula
-        is: {  //TODO: Exportarlas al local Storage
+        is: {  
           id: false,
           nit: false,
-        }
+        },
+        workDone:'',
 
       }
     },
@@ -98,6 +99,7 @@ createApp({
         this.failure=''
         this.deadLine=''
         this.inCharge=''
+        this.workDone=''
        
       },
       registerResume(){
@@ -112,7 +114,9 @@ createApp({
           failure:this.failure,
           deadLine:this.deadLine,
           inCharge:this.inCharge, 
-
+        }
+        if(this.workDone!==''){
+          resume['workDone']=this.workDone
         }
         resume[propiedad]=this.id||this.nit
         this.successfulAlert()

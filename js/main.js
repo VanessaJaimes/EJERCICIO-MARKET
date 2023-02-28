@@ -2,7 +2,7 @@ var app = new Vue({
   el: "#app",
   data: {
     selected: null,
-    amount: 0,
+    amount: 1,
     productsSelected: [],
     date: "",
     ID: "",
@@ -16,12 +16,13 @@ var app = new Vue({
       { name: "bateria", amount: 100, price: 289900 },
       { name: "discos frenos", amount: 40, price: 650000 },
     ],
+   
 
     is: {
       id: false,
       nit: false,
     },
-
+    workDone:''
   },
 
   methods: {
@@ -102,7 +103,8 @@ var app = new Vue({
             price:parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
             totalPrice:parseInt(this.priceReplacement)*parseInt(`${this.amount}`),
-            customer:this.name
+            customer:this.name,
+            workDone:this.workDone
           });
 
           localStorage.setItem(
@@ -172,7 +174,8 @@ var app = new Vue({
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
             price: parseInt(`${this.price}`),
             totalPrice: parseInt(`${this.price * this.amount}`),
-            customer:this.name
+            customer:this.name,
+            workDone:this.workDone
           });
 
           localStorage.setItem(
