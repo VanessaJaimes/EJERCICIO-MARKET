@@ -16,7 +16,8 @@ const { createApp } = Vue
         //Arreglos con todas las ventas y las hojas de vida del id digitado.
         productSales:[],
         productSell:[],
-        resumes:[]
+        resumes:[],
+        workDone:''
       }
     },
    
@@ -101,9 +102,12 @@ const { createApp } = Vue
                     deadLine:resumes[0].deadLine,
                     failure:resumes[0].failure,
                     inCharge:resumes[0].inCharge,
-                    vehicleParts
+                    vehicleParts,
                 }
                 data[code]=resumes[0].id||resumes[0].NIT
+                /*******************Nueno código para agregar el mensaje a la factura************************************/
+                this.workDone=resumes[0].workDone || productSell[0].workDone
+                data["workDone"]=this.workDone
                 
             }else if(resumes.length===0 && productSales.length>0){
                  data={
@@ -114,6 +118,8 @@ const { createApp } = Vue
                 data[code]=productSales[0].id||productSales[0].NIT
                 
             }
+            
+            
             localStorage.setItem("data",JSON.stringify(data))
             this.id=''
             this.nit=''
