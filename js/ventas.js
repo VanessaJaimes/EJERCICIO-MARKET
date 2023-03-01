@@ -31,7 +31,12 @@ var app = new Vue({
         id: true,
         nit: false,
       };
+      this.fullName = "";
+      this.amount = 0;
+      this.selected = null;
+      this.ID = "";
       this.NIT = "";
+      this.date = "";
     },
 
     showNIT() {
@@ -39,7 +44,12 @@ var app = new Vue({
         id: false,
         nit: true,
       };
+      this.fullName = "";
+      this.amount = 0;
+      this.selected = null;
       this.ID = "";
+      this.NIT = "";
+      this.date = "";
     },
 
     addReplacement() {
@@ -143,16 +153,16 @@ var app = new Vue({
 
           localStorage.setItem("productSales", JSON.stringify(this.productsSelected));
 
-          this.fullName = "";
+          // this.fullName = "";
           this.amount = 0;
           this.selected = null;
-          this.ID = "";
-          this.NIT = "";
-          this.date = "";
-          this.is = {
-            id: false,
-            nit: false,
-          };
+          // this.ID = "";
+          // this.NIT = "";
+          // this.date = "";
+          // this.is = {
+          //   id: false,
+          //   nit: false,
+          // };
 
           Swal.fire({
             position: "center",
@@ -212,16 +222,9 @@ var app = new Vue({
 
           localStorage.setItem("productSales", JSON.stringify(this.productsSelected));
 
-          this.fullName = "";
           this.amount = 0;
           this.selected = null;
-          this.ID = "";
-          this.NIT = "";
-          this.date = "";
-          this.is = {
-            id: false,
-            nit: false,
-          };
+
           Swal.fire({
             position: "center",
             icon: "success",
