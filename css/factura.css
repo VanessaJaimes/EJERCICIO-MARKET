@@ -1,119 +1,133 @@
-:root{
-    --real-white: #fff;
-    --real-black: #000;
-    --real-green: #4E937A;
-    --real-blue: #111C55;
-    --real-dark-green: #849483;
+:root {
+  --real-white: #fff;
+  --real-black: #000;
+  --real-green: #4e937a;
+  --real-blue: #111c55;
+  --real-dark-green: #849483;
 }
 
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    border: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  border: 0px;
 }
 
-.body-main{
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--real-blue);
-    color: var(--real-black);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+body {
+  background-color: var(--real-blue);
 }
 
-.main-header{
-    height: 15vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px;
+.body-main {
+  width: 100vw;
+  background-color: var(--real-blue);
+  color: var(--real-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.image-ref{
-    color: var(--real-white);
-    text-decoration: none;
-    font-size: 1.5em;
-    font-weight: bold;
+.main-header {
+  height: 15vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
 }
 
-.image-ref:hover{
-    color: var(--real-white);
-    text-decoration: none;
+.image-ref {
+  color: var(--real-white);
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
-.header-list{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
+.image-ref:hover {
+  color: var(--real-white);
+  text-decoration: none;
 }
 
-.item-ref--header{
-    color: var(--real-white);
-    text-decoration: none;
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 0px 30px;
+.header-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
 }
 
-.item-ref--header:hover{
-    color: var(--real-green);
-    text-decoration: none;
+.item-ref--header {
+  color: var(--real-white);
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0px 30px;
 }
 
-.main-bill{
-    height: 75vh;
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px;
-    background-color: var(--real-white);
-    border-radius: 15px;
-    overflow-y: scroll;
-    margin-bottom: 6vh;
+.item-ref--header:hover {
+  color: var(--real-green);
+  text-decoration: none;
 }
 
-.bill-info, .bill-prices, .bill-iva, .bill-total{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+.main-bill {
+  z-index: 10;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background-color: var(--real-white);
+  border-radius: 15px;
+  margin-bottom: 6vh;
+  font-size: 1rem;
 }
 
-.info-item, .prices-replacement, .iva-total{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 0px;
+.bill-info,
+.bill-prices,
+.bill-iva,
+.bill-total {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-.item-label, .replacement-label, .total-label--iva{
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0px 10px;
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.733)
+.info-item,
+.prices-replacement,
+.iva-total {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0px;
 }
 
-.item-value, .replacement-value, .total-value--iva{
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0px 10px;
-    font-weight: bold;
-    text-decoration: underline;
+.item-label,
+.replacement-label,
+.total-label--iva {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0px 10px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.733);
 }
 
-.bill-prices, .bill-iva, .bill-total{
-    border-top: 1px solid rgba(0, 0, 0, 0.733);
+.item-value,
+.replacement-value,
+.total-value--iva {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0px 10px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.bill-prices,
+.bill-iva,
+.bill-total {
+  border-top: 1px solid rgba(0, 0, 0, 0.733);
 }

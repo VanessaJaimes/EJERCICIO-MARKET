@@ -7,22 +7,21 @@ var app = new Vue({
     date: "",
     ID: "",
     NIT: "",
-    name:"",
-    price:0,
+    name: "",
+    price: 0,
     inventory: [
-      { name: "aceite", amount: 10, price: 130000 },
-      { name: "empaque", amount: 100, price: 56000 },
-      { name: "llanta", amount: 20, price: 198400 },
-      { name: "bateria", amount: 100, price: 289900 },
-      { name: "discos frenos", amount: 40, price: 650000 },
+      { name: "aceite", amount: 1000, price: 130000 },
+      { name: "empaque", amount: 1000, price: 56000 },
+      { name: "llanta", amount: 1000, price: 198400 },
+      { name: "bateria", amount: 1000, price: 289900 },
+      { name: "discos frenos", amount: 1000, price: 650000 },
     ],
-   
 
     is: {
       id: false,
       nit: false,
     },
-    workDone:''
+    workDone: "",
   },
 
   methods: {
@@ -41,12 +40,7 @@ var app = new Vue({
         });
         return false;
       }
-      if (
-        !this.selected ||
-        this.selected == "" ||
-        this.selected == null ||
-        !nameProducts.includes(this.selected)
-      ) {
+      if (!this.selected || this.selected == "" || this.selected == null || !nameProducts.includes(this.selected)) {
         Swal.fire({
           title: "Error",
           text: "Seleccione un repuesto",
@@ -55,12 +49,7 @@ var app = new Vue({
         });
         return false;
       }
-      if (
-        !this.amount ||
-        this.amount == "" ||
-        this.amount == null ||
-        this.amount <= 0
-      ) {
+      if (!this.amount || this.amount == "" || this.amount == null || this.amount <= 0) {
         Swal.fire({
           title: "Error",
           text: "La cantidad debe ser mayor a cero",
@@ -71,17 +60,11 @@ var app = new Vue({
       }
 
       // cedula
-      if (
-        nameProducts.includes(this.selected) &&
-        this.amount > 0 &&
-        this.date &&
-        this.ID &&
-        expRegID.test(this.ID)
-      ) {
+      if (nameProducts.includes(this.selected) && this.amount > 0 && this.date && this.ID && expRegID.test(this.ID)) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
             if (this.amount <= item.amount) {
-              this.priceReplacement=item.price
+              this.priceReplacement = item.price;
               return item;
             }
           }
@@ -100,17 +83,14 @@ var app = new Vue({
             id: parseInt(this.ID),
             name: `${this.selected}`,
             amount: parseInt(`${this.amount}`),
-            price:parseInt(this.priceReplacement),
+            price: parseInt(this.priceReplacement),
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
-            totalPrice:parseInt(this.priceReplacement)*parseInt(`${this.amount}`),
-            customer:this.name,
-            workDone:this.workDone
+            totalPrice: parseInt(this.priceReplacement) * parseInt(`${this.amount}`),
+            customer: this.name,
+            workDone: this.workDone,
           });
 
-          localStorage.setItem(
-            "productSell",
-            JSON.stringify(this.productsSelected)
-          );
+          localStorage.setItem("productSell", JSON.stringify(this.productsSelected));
 
           this.amount = 0;
           this.selected = null;
@@ -142,13 +122,7 @@ var app = new Vue({
         // console.log(this.productsSelected);
 
         // NIT
-      } else if (
-        nameProducts.includes(this.selected) &&
-        this.amount > 0 &&
-        this.date &&
-        this.NIT &&
-        regExpNIT.test(this.NIT)
-      ) {
+      } else if (nameProducts.includes(this.selected) && this.amount > 0 && this.date && this.NIT && regExpNIT.test(this.NIT)) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
             if (this.amount <= item.amount) {
@@ -174,14 +148,11 @@ var app = new Vue({
             date: new Date(`${this.date}`).toLocaleDateString("es-CO"),
             price: parseInt(`${this.price}`),
             totalPrice: parseInt(`${this.price * this.amount}`),
-            customer:this.name,
-            workDone:this.workDone
+            customer: this.name,
+            workDone: this.workDone,
           });
 
-          localStorage.setItem(
-            "productSell",
-            JSON.stringify(this.productsSelected)
-          );
+          localStorage.setItem("productSell", JSON.stringify(this.productsSelected));
 
           this.amount = 0;
           this.selected = null;
@@ -227,21 +198,20 @@ var app = new Vue({
     if (productSell != null) {
       this.productsSelected = productSell;
     }
-    if(JSON.parse(localStorage.getItem("is"))===null) return
+    if (JSON.parse(localStorage.getItem("is")) === null) return;
 
-    this.is=JSON.parse(localStorage.getItem("is"))
-    if(this.is.id){
-      this.ID=localStorage.getItem("id")
+    this.is = JSON.parse(localStorage.getItem("is"));
+    if (this.is.id) {
+      this.ID = localStorage.getItem("id");
     }
-    if(this.is.nit){
-      this.NIT=localStorage.getItem("NIT")
+    if (this.is.nit) {
+      this.NIT = localStorage.getItem("NIT");
     }
-    this.name=localStorage.getItem("name")
-    this.date=localStorage.getItem("deadLine")
-    
+    this.name = localStorage.getItem("name");
+    this.date = localStorage.getItem("deadLine");
+
     if (inventory != null) {
       this.inventory = inventory;
     }
-
   },
 });

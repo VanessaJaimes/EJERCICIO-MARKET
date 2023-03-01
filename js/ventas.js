@@ -10,11 +10,11 @@ var app = new Vue({
     fullName: "",
 
     inventory: [
-      { name: "aceite", amount: 10, price: 130000 },
-      { name: "empaque", amount: 100, price: 56000 },
-      { name: "llanta", amount: 20, price: 198400 },
-      { name: "bateria", amount: 100, price: 289900 },
-      { name: "discos frenos", amount: 40, price: 650000 },
+      { name: "aceite", amount: 1000, price: 130000 },
+      { name: "empaque", amount: 1000, price: 56000 },
+      { name: "llanta", amount: 1000, price: 198400 },
+      { name: "bateria", amount: 1000, price: 289900 },
+      { name: "discos frenos", amount: 1000, price: 650000 },
     ],
 
     is: {
@@ -92,12 +92,7 @@ var app = new Vue({
         return false;
       }
 
-      if (
-        !this.selected ||
-        this.selected == "" ||
-        this.selected == null ||
-        !nameProducts.includes(this.selected)
-      ) {
+      if (!this.selected || this.selected == "" || this.selected == null || !nameProducts.includes(this.selected)) {
         Swal.fire({
           title: "Error",
           text: "Seleccione un repuesto",
@@ -106,12 +101,7 @@ var app = new Vue({
         });
         return false;
       }
-      if (
-        !this.amount ||
-        this.amount == "" ||
-        this.amount == null ||
-        this.amount <= 0
-      ) {
+      if (!this.amount || this.amount == "" || this.amount == null || this.amount <= 0) {
         Swal.fire({
           title: "Error",
           text: "La cantidad debe ser mayor a cero",
@@ -122,14 +112,7 @@ var app = new Vue({
       }
 
       // cedula
-      if (
-        nameProducts.includes(this.selected) &&
-        this.amount > 0 &&
-        this.date &&
-        this.ID &&
-        expRegID.test(this.ID) &&
-        this.fullName
-      ) {
+      if (nameProducts.includes(this.selected) && this.amount > 0 && this.date && this.ID && expRegID.test(this.ID) && this.fullName) {
         let isAvailable = this.inventory.filter((item) => {
           if (item.name === this.selected) {
             if (this.amount <= item.amount) {
@@ -158,10 +141,7 @@ var app = new Vue({
             totalPrice: parseInt(`${this.price * this.amount}`),
           });
 
-          localStorage.setItem(
-            "productSales",
-            JSON.stringify(this.productsSelected)
-          );
+          localStorage.setItem("productSales", JSON.stringify(this.productsSelected));
 
           this.fullName = "";
           this.amount = 0;
@@ -230,10 +210,7 @@ var app = new Vue({
             totalPrice: parseInt(`${this.price * this.amount}`),
           });
 
-          localStorage.setItem(
-            "productSales",
-            JSON.stringify(this.productsSelected)
-          );
+          localStorage.setItem("productSales", JSON.stringify(this.productsSelected));
 
           this.fullName = "";
           this.amount = 0;

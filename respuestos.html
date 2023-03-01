@@ -37,41 +37,29 @@
               <form @submit.prevent="addReplacement" class="row register-form">
                 <div class="col-md-6">
                   <div class="form-group">
-                    
-                   <div v-if="is.id">
-                    
-                    <label for="nombre" class="h6">Nombre Cliente:</label>
-                    <input type="text" class="form-control" id="nombre" v-model="name" readonly>
-                    
-                    <label for="cedula" class="h6">Identificacion Dueño:</label>
-                    <input
-                      v-model="ID"
-                      type="text"
-                      class="form-control"
-                      placeholder="Identificacion del dueño *"
-                      pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$"
-                      required
-                      id="cedula"
-                      readonly />
-                   </div>
+
+                    <div v-if="is.id">
+
+                      <label for="nombre" class="h6">Nombre Cliente:</label>
+                      <input type="text" class="form-control" id="nombre" v-model="name" readonly>
+
+                      <label for="cedula" class="h6">Identificacion Dueño:</label>
+                      <input v-model="ID" type="text" class="form-control" placeholder="Identificacion del dueño *"
+                        pattern="^((\d{8})|(\d{10})|(\d{11})|(\d{6}-\d{5}))?$" required id="cedula" readonly />
+                    </div>
                     <div v-if="is.nit">
-                    <label for="nombre-nit" class="h6">Nombre Cliente:</label>
-                    <input type="text" class="form-control" id="nombre-nit" v-model="name" readonly>
-                     <label for="NIT" class="h6">NIT de la empresa:</label>
-                     <input
-                       v-model="NIT"
-                       type="text"
-                       class="form-control"
-                       placeholder="NIT empresa*"
-                       pattern="(^[0-9]+-{1}[0-9]{1})"
-                       required
-                       id="NIT"
-                       readonly />
+                      <label for="nombre-nit" class="h6">Nombre Cliente:</label>
+                      <input type="text" class="form-control" id="nombre-nit" v-model="name" readonly>
+                      <label for="NIT" class="h6">NIT de la empresa:</label>
+                      <input v-model="NIT" type="text" class="form-control" placeholder="NIT empresa*"
+                        pattern="(^[0-9]+-{1}[0-9]{1})" required id="NIT" readonly />
                     </div>
                     <div class="mt-3 mb-3">
                       <label for="exampleInputEmail1" class="h6">Trabajo realizado en el vehículo:</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="workDone" required>
-                      <div id="emailHelp" class="form-text">Esta es la descripción de la reparación  que realizó el mecánico.</div>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        v-model="workDone" required>
+                      <div id="emailHelp" class="form-text">Esta es la descripción de la reparación que realizó el
+                        mecánico.</div>
                     </div>
                   </div>
                 </div>
