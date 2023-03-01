@@ -91,6 +91,12 @@
                     </small>
                     <h2 class="item-value">{{data.inCharge}}</h2>
                 </div>
+                <div class="info-item" v-if="data.workDone">
+                    <small>
+                        <h2 class="item-label">Reparación realizada: </h2>
+                    </small>
+                    <h2 class="item-value">{{data.workDone}}</h2>
+                </div>
             </div>
             <!--Bill prices-->
             <div class="bill-prices">

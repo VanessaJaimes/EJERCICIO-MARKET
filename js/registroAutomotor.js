@@ -1,4 +1,24 @@
 const { createApp } = Vue
+// const data={ 
+//               NIT: "900096245-4",
+//               customer:"La Casa de la UPS",
+//               date: "2/3/2023",
+//               workDone: "Se lo purga",
+//               carParts:[
+//                 {
+//                   amount: 2,
+//                   name:"aceite",
+//                   price: 130000,
+//                   totalPrice:260000,
+//                 },
+//                 {
+//                   amount: 1,
+//                   name:"llanta",
+//                   price: 19840,
+//                   totalPrice:19840,
+//                 }
+//               ]
+//             }
 
 createApp({
     data() {
@@ -145,3 +165,5 @@ createApp({
     }
 
   }).mount('#app')
+
+
